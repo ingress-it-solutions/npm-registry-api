@@ -11,6 +11,8 @@ class NpmRegistry
     /** @var string */
     protected $baseUrl;
 
+    protected $registryUrl;
+
     const LAST_DAY = 'last-day';
     const LAST_WEEK = 'last-week';
     const LAST_MONTH = 'last-month';
@@ -21,10 +23,38 @@ class NpmRegistry
      * @param \GuzzleHttp\Client $client
      * @param string $baseUrl
      */
-    public function __construct(Client $client, $baseUrl = 'https://api.npmjs.org/downloads')
+    public function __construct(Client $client, $baseUrl = 'https://api.npmjs.org/downloads', $registryUrl = 'https://registry.npmjs.org')
     {
         $this->client = $client;
         $this->baseUrl = $baseUrl;
+        $this->registryUrl = $registryUrl;
+    }
+
+    private function getRegistryInfo($packageName)
+    {
+        return $this->makeRegistryRequest('/{$packageName}');
+    }
+
+
+    private function getRegistryVersionInfo($packageName, $version)
+    {
+        return $this->makeRegistryRequest('/{$packageName}/{$version}');
+    }
+
+    /**
+     * @param string $resource
+     * @param array $query
+     *
+     * @return array
+     */
+    private function makeRegistryRequest($resource, array $query = [])
+    {
+        $packages = $this->client
+            ->get("{$this->registryUrl}{$resource}", compact('query'))
+            ->getBody()
+            ->getContents();
+
+        return json_decode($packages, true);
     }
 
     /**
