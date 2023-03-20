@@ -1,0 +1,41 @@
+{
+  "name": "ingress-it-solutions/npm-registry-api",
+  "description": "Fetch stats for your NPM packages from npm registry",
+  "keywords": [
+    "ingress-it-solutions",
+    "npm",
+    "stats",
+    "api"
+  ],
+  "type": "library",
+  "homepage": "https://github.com/ingress-it-solutions/npm-registry-api",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ingress Team",
+      "email": "hello@ingressit.com",
+      "homepage": "https://www.ingressit.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": "^8.0",
+    "guzzlehttp/guzzle": "^7.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8.0.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "IngressITSolutions\\NpmRegistry\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "IngressITSolutions\\NpmRegistry\\Test\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit"
+  }
+}
