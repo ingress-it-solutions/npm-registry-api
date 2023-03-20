@@ -21,6 +21,12 @@ $client = new \GuzzleHttp\Client();
 $npmStats = new \IngressITSolutions\NpmRegistry\NpmRegistry($client);
 ```
 
+
+### Get info for a package of your choice
+``` php
+$npmStats->getRegistryInfo('vue');
+```
+
 ### Get stats for a package of your choice
 ``` php
 $npmStats->getStats('jquery');
